@@ -17,7 +17,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
             display: flex;
             justify-content: center;
             align-items: center;
-            background-image: url('ChatGPT Image 28_08_2025, 12_57_12.png"); /* imagem de fundo */
+            background-image: url('ChatGPT Image 28_08_2025, 12_57_12.png'); /* imagem de fundo */
             background-size: cover;
             background-position: center;
             overflow: hidden;
@@ -110,6 +110,9 @@ Seu amor 💕
         }
 
         botao.addEventListener('click', () => {
+            // esconde o botão
+            botao.style.display = 'none';
+
             // mostra carta e fade-in
             carta.style.display = 'block';
             setTimeout(() => {
@@ -129,7 +132,10 @@ Seu amor 💕
                 setTimeout(() => {
                     carta.style.display = 'none';
                     musica.pause();
-                    clearInterval(coracoesInterval); // para de gerar corações
+                    clearInterval(coracoesInterval);
+
+                    // mostra o botão de novo
+                    botao.style.display = 'block';
                 }, 1000); // espera transição terminar
             }, 7000);
         });
