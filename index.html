@@ -3,13 +3,143 @@
 Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
 Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit this template
 -->
-<html>
-    <head>
-        <title>TODO supply a title</title>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    </head>
-    <body>
-        <div>TODO write content</div>
-    </body>
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carta Digital 💌</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Serif', serif;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-image: url("ChatGPT Image 28_08_2025, 12_57_12.png"); /* imagem de fundo */
+            background-size: cover;
+            background-position: center;
+            overflow: hidden;
+        }
+
+        #botao {
+            padding: 15px 30px;
+            font-size: 20px;
+            color: white;
+            background-color: #ff69b4;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            z-index: 2;
+            transition: transform 0.2s, opacity 0.3s;
+        }
+
+        #botao:hover {
+            transform: scale(1.1);
+        }
+
+        #carta {
+            position: absolute;
+            width: 400px;
+            padding: 20px;
+            background-color: #ffe4e1;
+            border-radius: 20px;
+            border: 5px solid #ff69b4;
+            opacity: 0;
+            transition: opacity 1s;
+            display: none;
+            z-index: 1;
+            box-shadow: 0 6px 15px rgba(0,0,0,0.3);
+        }
+
+        #mensagem {
+            white-space: pre-wrap;
+            font-size: 16px;
+            line-height: 1.6;
+        }
+
+        .coracao {
+            position: absolute;
+            color: red;
+            font-size: 20px;
+            opacity: 0.8;
+            animation-name: flutuar;
+            animation-timing-function: linear;
+        }
+
+        @keyframes flutuar {
+            0% { transform: translateY(0) scale(1); opacity: 0.8; }
+            50% { opacity: 1; }
+            100% { transform: translateY(-600px) scale(1.5); opacity: 0; }
+        }
+    </style>
+</head>
+<body>
+    <button id="botao">Clique aqui 💖</button>
+
+    <div id="carta">
+        <div id="mensagem">
+Meu amor,
+
+Você ilumina minha vida de uma forma que eu nunca imaginei. ✨
+Seu sorriso é a minha inspiração e cada dia ao seu lado é único.
+Te amo mais do que palavras podem dizer.
+
+Com todo carinho,
+Seu amor 💕
+        </div>
+    </div>
+
+    <audio id="musica" loop>
+        <source src="romantica.wav" type="audio/wav">
+        Seu navegador não suporta áudio.
+    </audio>
+
+    <script>
+        const botao = document.getElementById('botao');
+        const carta = document.getElementById('carta');
+        const musica = document.getElementById('musica');
+
+        function criarCoracao() {
+            const coracao = document.createElement('div');
+            coracao.classList.add('coracao');
+            coracao.innerHTML = '❤️';
+            coracao.style.left = Math.random() * window.innerWidth + 'px';
+            coracao.style.fontSize = (15 + Math.random() * 25) + 'px';
+            coracao.style.animationDuration = (3 + Math.random() * 3) + 's';
+            document.body.appendChild(coracao);
+
+            // remove o coração após a animação
+            setTimeout(() => {
+                coracao.remove();
+            }, 6000);
+        }
+
+        botao.addEventListener('click', () => {
+            // mostra carta e fade-in
+            carta.style.display = 'block';
+            setTimeout(() => {
+                carta.style.opacity = 1;
+            }, 10);
+
+            // toca música
+            musica.currentTime = 0;
+            musica.play();
+
+            // gera corações continuamente enquanto a carta estiver visível
+            const coracoesInterval = setInterval(criarCoracao, 300);
+
+            // fade-out após 7 segundos
+            setTimeout(() => {
+                carta.style.opacity = 0;
+                setTimeout(() => {
+                    carta.style.display = 'none';
+                    musica.pause();
+                    clearInterval(coracoesInterval); // para de gerar corações
+                }, 1000); // espera transição terminar
+            }, 7000);
+        });
+    </script>
+</body>
 </html>
